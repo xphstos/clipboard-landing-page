@@ -1,0 +1,336 @@
+@use './mixins' as *;
+@use "sass:color" as *;
+
+::selection {
+	background-color: v("black");
+	color: v("white");
+}
+
+%container {
+	padding: 0 max(24px, 50vw - 1110px / 2);
+}
+
+html {
+	font-size: 18px;
+}
+
+body {
+	font: 400 1.111rem / 1.5 "Bai Jamjuree", sans-serif;
+	background: url("../images/bg-header-desktop.png") no-repeat top / contain;
+
+	@media screen and (max-width: 768px) {
+		background: url("../images/bg-header-mobile.png") no-repeat top / contain;
+	}
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+.main {
+	padding: clamp(72px, (144 / 1024) * 100vw, 144px) 0;
+}
+
+.section {
+	@extend %container;
+	text-align: center;
+
+	+ .section {
+		padding-top: clamp(72px, (144 / 1024) * 100vw, 144px);
+	}
+
+	&__header {
+		margin-bottom: clamp(48px, (72 / 768) * 100vw, 72px);
+	}
+
+	&__title {
+		font-weight: 600;
+		font-size: clamp(22px, (34 / 768) * 100vw, 34px);
+		color: v("blue-grayish-dark");
+		margin-bottom: 1rem;
+	}
+
+	&__subtitle {
+		font-size: clamp(13px, (20 / 768) * 100vw, 20px);
+		color: v("blue-grayish");
+		font-weight: 400;
+		max-width: 60ch;
+		margin: 0 auto;
+	}
+
+	&--intro {
+		.section__title {
+			font-size: clamp(24px, (44 / 768) * 100vw, 44px);
+		}
+
+		.logo {
+			max-width: 96px;
+			margin-bottom: clamp(48px, (72 / 768) * 100vw, 72px);
+		}
+
+		.section__header {
+			margin-bottom: clamp(48px, (56 / 768) * 100vw, 56px);
+		}
+	}
+
+	&--snippets {
+		padding: unset;
+
+		@media screen and (max-width: 768px) {
+			padding: 0 max(24px, 50vw - 1110px / 2);
+		}
+
+		.snippets {
+			display: grid;
+			gap: clamp(40px, (128 / 1024) * 100vw, 128px);
+			grid-template-columns: repeat(2, 1fr);
+
+			@media screen and (max-width: 768px) {
+				grid-template-columns: 1fr;
+			}
+
+			&__image {
+				width: calc(50vw + 10%);
+				transform: translateX(-10%);
+
+				@media screen and (max-width: 768px) {
+					width: 100%;
+					transform: translateX(0);
+				}
+			}
+
+			&__list {
+				padding: 0.75rem 0;
+				text-align: left;
+
+				@media screen and (max-width: 768px) {
+					text-align: center;
+				}
+
+				&-item {
+					+ .snippets__list-item {
+						margin-top: clamp(48px, (64 / 768) * 100vw, 64px);
+					}
+				}
+			}
+		}
+
+		.snippet {
+			&__title {
+				font-size: clamp(18px, (24 / 768) * 100vw, 24px);
+				margin-bottom: 0.5rem;
+			}
+			&__description {
+				color: v("blue-grayish");
+				font-size: clamp(13px, (16 / 768) * 100vw, 16px);
+				max-width: 33ch;
+
+				@media screen and (max-width: 768px) {
+					max-width: 100%;
+				}
+			}
+		}
+	}
+
+	&--workflow {
+		.workflows {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: clamp(2.5rem, (44 / 768) * 100vw, 44px);
+
+			@media screen and (max-width: 295px) {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.workflow {
+			&__icon-container {
+				width: 48px;
+				height: 48px;
+				display: flex;
+				margin: 0 auto;
+				margin-bottom: clamp(1.5rem, (44 / 768) * 100vw, 44px);
+			}
+
+			&__icon {
+				margin: auto;
+			}
+
+			&__title {
+				font-size: clamp(18px, (24 / 768) * 100vw, 24px);
+				margin-bottom: clamp(0.75em, (24 / 768) * 100vw, 24px);
+			}
+
+			&__description {
+				color: v("blue-grayish");
+				font-size: clamp(13px, (16 / 768) * 100vw, 16px);
+			}
+		}
+	}
+
+	&--trusted-by {
+		.trustees {
+			display: grid;
+			align-items: center;
+			grid-template-columns: repeat(auto-fit, minmax(12vw, 1fr));
+			gap: 2rem;
+
+			@media screen and (max-width: 768px) {
+				grid-template-columns: 1fr;
+				gap: 3rem;
+			}
+		}
+
+		.trustee {
+			width: 12vw;
+			height: 12vw;
+			justify-self: center;
+			align-items: center;
+			line-height: 12vw;
+
+			@media screen and (max-width: 768px) {
+				line-height: unset;
+				height: unset;
+				width: 50%;
+			}
+
+			&__logo {
+				max-width: 80%;
+
+				@media screen and (max-width: 768px) {
+					max-width: 165px;
+				}
+			}
+		}
+	}
+}
+
+.btn {
+	height: clamp(48px, (56 / 768) * 100vw, 56px);
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 2em;
+	font-size: clamp(14px, (18 / 768) * 100vw, 18px);
+	border-radius: clamp(48px, (56 / 768) * 100vw, 56px);
+	border-bottom: 4px solid hsla(0deg 0% 0% / 0);
+	background: hsla(0deg 0% 0% / 0);
+	cursor: pointer;
+	font-weight: 600;
+	transition: box-shadow 0.2s ease, background-color 0.2s ease;
+	vertical-align: middle;
+	white-space: nowrap;
+
+	&--primary {
+		background: var(--cyan);
+		border-color: adjust(c("cyan"), $lightness: -8%);
+		box-shadow: 0 0.5em 1em adjust(c("cyan"), $alpha: -0.8);
+		color: v("white");
+
+		&:hover {
+			background: adjust(c("cyan"), $lightness: 3%);
+			box-shadow: 0 0.5em 1.2em adjust(c("cyan"), $alpha: -0.6);
+		}
+	}
+
+	&--secondary {
+		background: var(--blue);
+		border-color: adjust(c("blue"), $lightness: -8%);
+		box-shadow: 0 0.5em 1em adjust(c("blue"), $alpha: -0.8);
+		color: v("white");
+
+		&:hover {
+			background: adjust(c("blue"), $lightness: 3%);
+			box-shadow: 0 0.5em 1.2em adjust(c("blue"), $alpha: -0.6);
+		}
+	}
+}
+
+.actions {
+	display: grid;
+	gap: 1rem;
+	grid-auto-flow: column;
+	justify-content: center;
+
+	@media screen and (max-width: 475px) {
+		grid-auto-flow: row;
+		justify-content: unset;
+	}
+}
+
+.footer {
+	@extend %container;
+	padding-top: 48px;
+	padding-bottom: 48px;
+	background-color: adjust(c("blue-grayish"), $lightness: +30%);
+	display: grid;
+	align-items: start;
+	grid-template-columns: max-content 1fr max-content;
+	gap: 7rem;
+
+	@media screen and (max-width: 768px) {
+		gap: 2rem;
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	&__homelink {
+		display: block;
+	}
+
+	&__logo {
+		max-width: 56px;
+	}
+
+	.nav {
+		columns: 10rem;
+
+		@media screen and (max-width: 768px) {
+			columns: 1;
+		}
+
+		&__link {
+			display: block;
+			font-size: clamp(15px, (18 / 768) * 100vw, 18px);
+			opacity: 0.5;
+			transition: opacity 0.2s ease, color 0.2s ease;
+			cursor: pointer;
+
+			+ .nav__link {
+				margin-top: 0.75rem;
+			}
+
+			&:hover {
+				opacity: 1;
+				color: v("cyan");
+			}
+		}
+	}
+
+	.social {
+		display: grid;
+		grid-auto-flow: column;
+		justify-content: center;
+		gap: 24px;
+
+		&__link {
+			display: inline-block;
+			opacity: 0.7;
+			transition: opacity 0.2s ease, filter 0.2s ease;
+			filter: hue-rotate(310deg) Saturate(4) brightness(0.2);
+			cursor: pointer;
+
+			&:hover {
+				opacity: 1;
+				filter: hue-rotate(310deg) Saturate(4) brightness(2);
+			}
+
+			&-img {
+				vertical-align: middle;
+				width: 24px;
+				height: auto;
+			}
+		}
+	}
+}
