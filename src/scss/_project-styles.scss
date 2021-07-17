@@ -83,6 +83,7 @@ img {
 
 		.snippets {
 			display: grid;
+			align-items: center;
 			gap: clamp(40px, (128 / 1024) * 100vw, 128px);
 			grid-template-columns: repeat(2, 1fr);
 
@@ -93,6 +94,13 @@ img {
 			&__image {
 				width: calc(50vw + 10%);
 				transform: translateX(-10%);
+
+				@media screen and (min-width: 1600px) {
+					transform: translateX(0);
+					width: 100%;
+					justify-self: end;
+					max-width: 768px;
+				}
 
 				@media screen and (max-width: 768px) {
 					width: 100%;
@@ -110,7 +118,7 @@ img {
 
 				&-item {
 					+ .snippets__list-item {
-						margin-top: clamp(48px, (64 / 768) * 100vw, 64px);
+						margin-top: clamp(48px, (64 / 1600) * 100vw, 64px);
 					}
 				}
 			}
@@ -173,7 +181,7 @@ img {
 		.trustees {
 			display: grid;
 			align-items: center;
-			grid-template-columns: repeat(auto-fit, minmax(12vw, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
 			gap: 2rem;
 
 			@media screen and (max-width: 768px) {
@@ -183,11 +191,11 @@ img {
 		}
 
 		.trustee {
-			width: 12vw;
-			height: 12vw;
+			width: 144px;
+			height: 144px;
 			justify-self: center;
 			align-items: center;
-			line-height: 12vw;
+			line-height: 144px;
 
 			@media screen and (max-width: 768px) {
 				line-height: unset;
@@ -199,7 +207,8 @@ img {
 				max-width: 80%;
 
 				@media screen and (max-width: 768px) {
-					max-width: 165px;
+					max-width: unset;
+					width: unset;
 				}
 			}
 		}
